@@ -13,13 +13,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function to fetch all Wainwrights data from the API
 function getAllWainwrights() {
-    fetch('https://raw.githubusercontent.com/annahndr/annahndr.github.io/master/wainwrights_data/wainwrights.json')
-        .then(response => response.json()) // Parse the JSON from the response
-        .then(data => {
-            allWainwrights = data; // Store the data in the global variable
-            displayWainwrights(allWainwrights); // Display all Wainwrights
-        })
-        .catch(error => console.error('Error fetching data:', error)); // Log any errors
+    fetch('https://raw.githubusercontent.com/annahndr/annahndr.github.io/master/wainwrights_data/wainwrights.jso')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse the JSON from the response
+    })
+    .then(data => {
+        allWainwrights = data; // Store the data in the global variable
+        displayWainwrights(allWainwrights); // Display all Wainwrights
+        document.getElementById("status-message").innerText = ""; // Clear the status message
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error); // Log the error
+        document.getElementById("status-message").innerText = "Error fetching data. Please try again later."; // Display error message
+    });
 }
 
 // Function to create and display Wainwrights as list items
