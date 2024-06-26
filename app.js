@@ -21,3 +21,22 @@ function getAllWainwrights() {
         })
         .catch(error => console.error('Error fetching data:', error)); // Log any errors
 }
+
+// Function to create and display Wainwrights as list items
+function displayWainwrights(wainwrights) {
+    const list = document.getElementById("wainwrights-list");
+    list.innerHTML = ""; // Clear the current list
+
+    // Loop through each Wainwright and create list items
+    wainwrights.forEach(wainwright => {
+        const listItem = document.createElement("li"); // Create a list item element
+        listItem.innerHTML = `
+            <h2>${wainwright.name}</h2>
+            <p><strong>Height:</strong> ${wainwright.height}m</p>
+            <p><strong>Area:</strong> ${wainwright.area}</p>
+        `; // Set the inner HTML with Wainwright details
+        list.appendChild(listItem); // Append the list item to the list
+    });
+}
+// Function to handle the form submission
+
