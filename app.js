@@ -30,11 +30,19 @@ function displayWainwrights(wainwrights) {
     // Loop through each Wainwright and create list items
     wainwrights.forEach(wainwright => {
         const listItem = document.createElement("li"); // Create a list item element
+
+        // Access the properties
+        const name = wainwright.name;
+        const heightMetres = wainwright.heightMetres; 
+        const heightFeet = wainwright.heightFeet;
+        const areaName = wainwright.area.areaName; 
+
+        // Set the inner HTML with Wainwright details
         listItem.innerHTML = `
-            <h2>${wainwright.name}</h2>
-            <p><strong>Height:</strong> ${wainwright.height}m</p>
-            <p><strong>Area:</strong> ${wainwright.area}</p>
-        `; // Set the inner HTML with Wainwright details
+            <h2>${name}</h2>
+            <p><strong>Height:</strong> ${heightMetres}m (${heightFeet}ft)</p>
+            <p><strong>Area:</strong> ${areaName}</p>
+        `; 
         list.appendChild(listItem); // Append the list item to the list
     });
 }
@@ -43,10 +51,16 @@ function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
     const filterValue = document.getElementById("filter-input").value.toLowerCase(); // Get the input value and convert to lowercase
     console.log("Filter value:", filterValue); // Log the filter value to the console
+    filterWainwrights(filterValue); // Call the filter function with the input value
 
     // Filter the Wainwrights based on the input value
-    const filteredWainwrights = allWainwrights.filter(wainwright =>
-        wainwright.name.toLowerCase().includes(filterValue)
-    );
-    displayWainwrights(filteredWainwrights); // Display the filtered Wainwrights
+    function filterWainwrights(filter) {
+        const filteredWainwrights = allWainwrights.filter(wainwright => 
+            wainwright.name.toLowerCase().includes(filter) ||
+            wainwright.area.areaName.toLowerCase().includes(filter)
+        ); // Filter the Wainwrights based on the name or area name
+        displayWainwrights(filteredWainwrights); // Display the filtered Wainwrights
+    }
 }
+
+
