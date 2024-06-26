@@ -51,7 +51,16 @@ function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
     const filterValue = document.getElementById("filter-input").value.toLowerCase(); // Get the input value and convert to lowercase
     console.log("Filter value:", filterValue); // Log the filter value to the console
-    filterWainwrights(filterValue); // Call the filter function with the input value
+    // Show filtering status message
+    document.getElementById("status-message").innerText = "Filtering Wainwrights...";
+    
+    // Introduce an artificial delay before filtering
+    setTimeout(() => {
+        filterWainwrights(filterValue); // Call the filter function with the filter/input value
+        
+        // Clear the status message
+        document.getElementById("status-message").innerText = "";
+    }, 1000); // 1 second delay
 
     // Filter the Wainwrights based on the input value
     function filterWainwrights(filter) {
