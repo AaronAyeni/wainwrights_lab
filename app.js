@@ -39,4 +39,14 @@ function displayWainwrights(wainwrights) {
     });
 }
 // Function to handle the form submission
+function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const filterValue = document.getElementById("filter-input").value.toLowerCase(); // Get the input value and convert to lowercase
+    console.log("Filter value:", filterValue); // Log the filter value to the console
 
+    // Filter the Wainwrights based on the input value
+    const filteredWainwrights = allWainwrights.filter(wainwright =>
+        wainwright.name.toLowerCase().includes(filterValue)
+    );
+    displayWainwrights(filteredWainwrights); // Display the filtered Wainwrights
+}
