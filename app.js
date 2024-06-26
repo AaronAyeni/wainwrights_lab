@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function to fetch all Wainwrights data from the API
 function getAllWainwrights() {
-    fetch('https://raw.githubusercontent.com/annahndr/annahndr.github.io/master/wainwrights_data/wainwrights.jso')
+    fetch('https://raw.githubusercontent.com/annahndr/annahndr.github.io/master/wainwrights_data/wainwrights.json')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
